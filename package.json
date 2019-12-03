@@ -4,11 +4,14 @@
   "description": "Bingo itsenäisyyspäivän illan ratoksi",
   "author": "Jari-Pekka Ryynänen <jappi85@gmail.com>",
   "private": true,
+  "homepage": "http://sjappig.github.io/linnanjuhlat-bingo",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
@@ -41,6 +44,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
