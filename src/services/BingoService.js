@@ -12,6 +12,7 @@ class BingoService {
     const newBoard = this.createNewBoard()
 
     localStorage.setItem('board', JSON.stringify(newBoard))
+    localStorage.setItem('startedTimestamp', new Date().toLocaleString('fi-FI'))
 
     return newBoard
   }
@@ -42,9 +43,14 @@ class BingoService {
     localStorage.setItem('selected', JSON.stringify(selected))
   }
 
+  getTimestamp () {
+    return localStorage.getItem('startedTimestamp')
+  }
+
   reset () {
     localStorage.removeItem('board')
     localStorage.removeItem('selected')
+    localStorage.removeItem('startedTimestamp')
   }
 }
 

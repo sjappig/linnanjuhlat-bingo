@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>Linnanjuhlat-bingo</h3>
     <bingo-board/>
   </div>
 </template>
@@ -20,4 +21,8 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: blue;
+  text-shadow: 2px 2px 4px navy;
+}
 </style>

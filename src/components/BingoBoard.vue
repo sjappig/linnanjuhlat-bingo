@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <div class="mt-2 container">
-      <div class="row flex-nowrap" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
-        <bingo-item
-          @toggle="toggle(rowIdx, colIdx)"
-          :description="description"
-          :selected="isSelected(rowIdx, colIdx)"
-          v-for="(description, colIdx) in items"
-          :key="'col' + colIdx"/>
-      </div>
-      <div class="row mt-2 justify-content-end">
-        <button @click="reset" type="button" class="btn btn-secondary btn-sm mr-1">Reset</button>
-      </div>
+  <div class="bingo-board mt-2 container">
+    <div class="row flex-nowrap" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
+      <bingo-item
+        @toggle="toggle(rowIdx, colIdx)"
+        :description="description"
+        :selected="isSelected(rowIdx, colIdx)"
+        v-for="(description, colIdx) in items"
+        :key="'col' + colIdx"/>
+    </div>
+    <div class="row mt-2 justify-content-end">
+      <div><i class="small mr-2">Peli aloitettu {{ timestamp }}</i></div>
+      <button @click="reset" type="button" class="btn btn-primary btn-sm mr-1">Uusi peli</button>
     </div>
   </div>
 </template>
@@ -27,7 +26,8 @@ export default {
   data () {
     return {
       board: bingoService.getBoard(),
-      selected: bingoService.getSelected()
+      selected: bingoService.getSelected(),
+      timestamp: bingoService.getTimestamp()
     }
   },
   methods: {
@@ -42,6 +42,7 @@ export default {
 
       this.board = bingoService.getBoard()
       this.selected = bingoService.getSelected()
+      this.timestamp = bingoService.getTimestamp()
     },
 
     toggle (rowIdx, colIdx) {
@@ -65,4 +66,7 @@ export default {
 </script>
 
 <style scoped>
+.bingo-board {
+  color: blue;
+}
 </style>

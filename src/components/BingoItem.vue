@@ -12,10 +12,10 @@ export default {
       const base = 'col border rounded bingo-item'
 
       if (!this.selected) {
-        return base
+        return base + ' border-primary'
       }
 
-      return base + ' border-primary text-white bg-primary bingo-item--selected'
+      return base + ' border-white text-white bingo-item--selected'
     }
   }
 }
@@ -31,10 +31,12 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 .bingo-item--selected {
   text-decoration: line-through;
+  background-color: blue;
 }
 </style>
