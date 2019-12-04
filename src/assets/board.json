@@ -1,6 +1,8 @@
 {
   "board": [
-    ["Kekkonen nähty", "Joku kompastuu"],
-    ["Haastateltava on humalassa", "Kättelijä jää jaarittelemaan presidentin kanssa"]
+    ["Sotaveteraani bongattu", "Joku astuu helmalle", "Juontaja sekoittaa nimet", "Katri Niskasen puku"],
+    ["Puku on kierrätysmateriaaleista", "Kansallispuku", "Joku kompuroi jonossa", "Vieras unohtaa odottaa avecciaan kättelyn jälkeen"],
+    ["Puku rikkoo etikettiä", "Näet kaverin tai tutun", "Jaarittelu kätellessä", "Teuvo Hakkarainen bongattu"],
+    ["Urheilija bongattu", "Näytetään kuvaa mielenosoituksesta", "Sinivalkoinen asu", "Parvella olevaa vierasjoukkoa näytetään"]
   ]
 }

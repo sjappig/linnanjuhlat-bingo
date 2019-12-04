@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container">
-      <div class="row" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
+    <div class="mt-2 container">
+      <div class="row flex-nowrap" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
         <bingo-item
           @toggle="toggle(rowIdx, colIdx)"
           :description="description"

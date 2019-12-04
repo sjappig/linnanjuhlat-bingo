@@ -1,6 +1,6 @@
 <template>
   <div :class="itemClass" @click="$emit('toggle')">
-    <p class="mt-2 text-center">{{ description }}</p>
+    <p class="mt-2 text-center small">{{ description }}</p>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 .bingo-item--selected {
