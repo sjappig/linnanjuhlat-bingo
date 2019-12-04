@@ -22,7 +22,7 @@ class BingoService {
     const result = []
     const edgeLength = 4
 
-    for (let idx = 0; idx < items.length; idx += edgeLength) {
+    for (let idx = 0; idx < items.length && idx < edgeLength * edgeLength; idx += edgeLength) {
       const slice = items.slice(idx, idx + edgeLength)
       if (slice.length !== edgeLength) {
         continue
