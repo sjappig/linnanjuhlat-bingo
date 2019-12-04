@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Set git user
+      run: |
+        git config user.name "Deploy workflow"
+        git config user.email "<>"
+    - name: Prepare and deploy
+      run: |
+        npm ci
+        npm run deploy -- --repo "https://sjappig:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+      env:
+        CI: true
