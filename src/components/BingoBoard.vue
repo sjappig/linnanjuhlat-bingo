@@ -1,13 +1,16 @@
 <template>
-  <div class="container">
-    <div class="row" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
-      <bingo-item
-        @toggle="toggle(rowIdx, colIdx)"
-        :description="description"
-        :selected="isSelected(rowIdx, colIdx)"
-        v-for="(description, colIdx) in items"
-        :key="'col' + colIdx"/>
+  <div>
+    <div class="container">
+      <div class="row" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
+        <bingo-item
+          @toggle="toggle(rowIdx, colIdx)"
+          :description="description"
+          :selected="isSelected(rowIdx, colIdx)"
+          v-for="(description, colIdx) in items"
+          :key="'col' + colIdx"/>
+      </div>
     </div>
+    <button @click="reset" type="button" class="btn btn-secondary btn-sm">Reset</button>
   </div>
 </template>
 
@@ -30,6 +33,13 @@ export default {
       const itemId = this.toItemId(rowIdx, colIdx)
 
       return this.selected.includes(itemId)
+    },
+
+    reset () {
+      bingoService.reset()
+
+      this.board = bingoService.getBoard()
+      this.selected = bingoService.getSelected()
     },
 
     toggle (rowIdx, colIdx) {

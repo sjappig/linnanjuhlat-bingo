@@ -1,3 +1,5 @@
+import shuffle from 'shuffle-array'
+
 class BingoService {
   getBoard () {
     const board = localStorage.getItem('board')
@@ -17,7 +19,9 @@ class BingoService {
   }
 
   shuffle (board) {
-    return board
+    board.forEach(shuffle)
+
+    return shuffle(board)
   }
 
   getSelected () {
