@@ -9,8 +9,10 @@
           v-for="(description, colIdx) in items"
           :key="'col' + colIdx"/>
       </div>
+      <div class="row mt-2 justify-content-end">
+        <button @click="reset" type="button" class="btn btn-secondary btn-sm mr-1">Reset</button>
+      </div>
     </div>
-    <button @click="reset" type="button" class="btn btn-secondary btn-sm">Reset</button>
   </div>
 </template>
 
