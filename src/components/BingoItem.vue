@@ -15,7 +15,7 @@ export default {
         return base
       }
 
-      return base + ' border-primary bg-primary bingo-item--selected'
+      return base + ' border-primary text-white bg-primary bingo-item--selected'
     }
   }
 }
@@ -24,6 +24,7 @@ export default {
 <style scoped>
 p {
   cursor: default;
+  hyphens: manual;
 }
 
 .bingo-item {
