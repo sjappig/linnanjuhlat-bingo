@@ -1,5 +1,6 @@
 <template>
   <div class="bingo-board mt-2 container">
+    <h3>Linnanjuhlat-bingo</h3>
     <div class="row flex-nowrap" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
       <bingo-item
         @toggle="toggle(rowIdx, colIdx)"
@@ -66,6 +67,11 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: blue;
+  text-shadow: 2px 2px 4px navy;
+}
+
 .bingo-board {
   color: blue;
 }
