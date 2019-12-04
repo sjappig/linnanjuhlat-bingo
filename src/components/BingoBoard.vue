@@ -56,7 +56,11 @@ export default {
         this.selected.push(itemId)
       }
 
-      bingoService.setSelected(this.selected)
+      const isBingo = bingoService.setSelected(this.selected)
+
+      if (isBingo) {
+        this.$emit('bingo')
+      }
     },
 
     toItemId (rowIdx, colIdx) {
