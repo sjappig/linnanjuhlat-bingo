@@ -13,6 +13,7 @@
 
 <script>
 import BingoItem from '@/components/BingoItem'
+import bingoService from '@/services/BingoService'
 
 export default {
   components: {
@@ -20,11 +21,8 @@ export default {
   },
   data () {
     return {
-      board: [
-        ['Kekkonen nähty', 'Joku kompastuu'],
-        ['Haastateltava on humalassa', 'Kättelijä jää jaarittelemaan presidentin kanssa']
-      ],
-      selected: []
+      board: bingoService.getBoard(),
+      selected: bingoService.getSelected()
     }
   },
   methods: {
@@ -33,6 +31,7 @@ export default {
 
       return this.selected.includes(itemId)
     },
+
     toggle (rowIdx, colIdx) {
       const itemId = this.toItemId(rowIdx, colIdx)
       const selectedIdx = this.selected.indexOf(itemId)
@@ -42,7 +41,10 @@ export default {
       } else {
         this.selected.push(itemId)
       }
+
+      bingoService.setSelected(this.selected)
     },
+
     toItemId (rowIdx, colIdx) {
       return 100 * rowIdx + colIdx
     }
