@@ -2,6 +2,8 @@
 
 > Bingo itsenäisyyspäivän illan ratoksi
 
+> https://sjappig.github.io/linnanjuhlat-bingo/
+
 ## Build Setup
 
 ``` bash
