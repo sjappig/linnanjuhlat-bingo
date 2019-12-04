@@ -1,6 +1,6 @@
 <template>
   <div :class="itemClass" @click="$emit('toggle')">
-    <p class="text-center">{{ description }}</p>
+    <p class="mt-2 text-center">{{ description }}</p>
   </div>
 </template>
 
@@ -9,13 +9,13 @@ export default {
   props: ['description', 'selected'],
   computed: {
     itemClass () {
-      const base = 'col border rounded'
+      const base = 'col border rounded bingo-item'
 
       if (!this.selected) {
         return base
       }
 
-      return base + ' border-success bingo-item--selected'
+      return base + ' border-primary bg-primary bingo-item--selected'
     }
   }
 }
@@ -24,6 +24,12 @@ export default {
 <style scoped>
 p {
   cursor: default;
+}
+
+.bingo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bingo-item--selected {
