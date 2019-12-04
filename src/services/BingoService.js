@@ -1,17 +1,15 @@
 import shuffle from 'shuffle-array'
+import { board } from '@/assets/board'
 
 class BingoService {
   getBoard () {
-    const board = localStorage.getItem('board')
+    const oldBoard = localStorage.getItem('board')
 
-    if (board) {
-      return JSON.parse(board)
+    if (oldBoard) {
+      return JSON.parse(oldBoard)
     }
 
-    const newBoard = this.shuffle([
-      ['Kekkonen nähty', 'Joku kompastuu'],
-      ['Haastateltava on humalassa', 'Kättelijä jää jaarittelemaan presidentin kanssa']
-    ])
+    const newBoard = this.shuffle(board)
 
     localStorage.setItem('board', JSON.stringify(newBoard))
 
