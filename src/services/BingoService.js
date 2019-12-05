@@ -6,17 +6,25 @@ const EDGE_LENGTH = 4
 class BingoService {
   getBoard () {
     const oldBoard = localStorage.getItem('board')
+    const oldTimestamp = localStorage.getItem('startedTimestamp')
 
-    if (oldBoard) {
-      return JSON.parse(oldBoard)
+    if (oldBoard && oldTimestamp) {
+      return {
+        board: JSON.parse(oldBoard),
+        timestamp: oldTimestamp
+      }
     }
 
-    const newBoard = this.createNewBoard()
+    const board = this.createNewBoard()
+    const timestamp = new Date().toLocaleString('fi-FI')
 
-    localStorage.setItem('board', JSON.stringify(newBoard))
-    localStorage.setItem('startedTimestamp', new Date().toLocaleString('fi-FI'))
+    localStorage.setItem('board', JSON.stringify(board))
+    localStorage.setItem('startedTimestamp', timestamp)
 
-    return newBoard
+    return {
+      board,
+      timestamp
+    }
   }
 
   createNewBoard () {
@@ -41,21 +49,15 @@ class BingoService {
   }
 
   setSelected (selected) {
-    const oldBingos = this.getBingos(this.getSelected())
-
     localStorage.setItem('selected', JSON.stringify(selected))
-
-    const newBingos = this.getBingos(selected)
-
-    return (newBingos - oldBingos) > 0
   }
 
-  getBingos (selected) {
+  getBingos (selected, itemMatcher) {
     let bingos = 0
     for (let row = 0; row < EDGE_LENGTH; ++row) {
       let matches = 0
       for (let col = 0; col < EDGE_LENGTH; ++col) {
-        if (selected.includes(100 * row + col)) {
+        if (selected.some(itemMatcher(row, col))) {
           matches++
         }
       }
@@ -66,7 +68,7 @@ class BingoService {
     for (let col = 0; col < EDGE_LENGTH; ++col) {
       let matches = 0
       for (let row = 0; row < EDGE_LENGTH; ++row) {
-        if (selected.includes(100 * row + col)) {
+        if (selected.some(itemMatcher(row, col))) {
           matches++
         }
       }
@@ -75,10 +77,6 @@ class BingoService {
       }
     }
     return bingos
-  }
-
-  getTimestamp () {
-    return localStorage.getItem('startedTimestamp')
   }
 
   reset () {

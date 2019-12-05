@@ -1,6 +1,12 @@
 <template>
   <div class="bingo-board mt-2 container">
-    <h3>Linnanjuhlat-bingo</h3>
+    <div class="row mb-1">
+      <h3 class="col-10">Linnanjuhlat-bingo</h3>
+      <div class="col-2 p-0" v-if="bingos">
+        <img src="@/assets/sale.png" width="25" height="auto"/>
+        <span class="small" v-show="bingos > 1">&times;{{ bingos }}</span>
+      </div>
+    </div>
     <div class="row flex-nowrap" v-for="(items, rowIdx) in board" :key="'row' + rowIdx">
       <bingo-item
         @toggle="toggle(rowIdx, colIdx)"
@@ -26,45 +32,60 @@ export default {
   },
   data () {
     return {
-      board: bingoService.getBoard(),
-      selected: bingoService.getSelected(),
-      timestamp: bingoService.getTimestamp()
+      board: [],
+      bingos: 0,
+      timestamp: 'joskus',
+      selected: []
     }
   },
+  mounted () {
+    this.init()
+  },
   methods: {
-    isSelected (rowIdx, colIdx) {
-      const itemId = this.toItemId(rowIdx, colIdx)
+    init () {
+      const { board, timestamp } = bingoService.getBoard()
+      this.board = board
+      this.timestamp = timestamp
+      this.selected = bingoService.getSelected()
+      this.bingos = bingoService.getBingos(this.selected, this.itemMatcher)
+    },
 
-      return this.selected.includes(itemId)
+    isSelected (rowIdx, colIdx) {
+      return this.selected.some(this.itemMatcher(rowIdx, colIdx))
+    },
+
+    itemMatcher (rowIdx, colIdx) {
+      return ({row, col}) => row === rowIdx && col === colIdx
     },
 
     reset () {
       bingoService.reset()
-
-      this.board = bingoService.getBoard()
-      this.selected = bingoService.getSelected()
-      this.timestamp = bingoService.getTimestamp()
+      this.init()
     },
 
     toggle (rowIdx, colIdx) {
-      const itemId = this.toItemId(rowIdx, colIdx)
-      const selectedIdx = this.selected.indexOf(itemId)
+      const selectedIdx = this.selected.findIndex(
+        this.itemMatcher(rowIdx, colIdx)
+      )
 
       if (selectedIdx >= 0) {
         this.selected.splice(selectedIdx, 1)
       } else {
-        this.selected.push(itemId)
+        this.selected.push({row: rowIdx, col: colIdx})
       }
 
-      const isBingo = bingoService.setSelected(this.selected)
+      bingoService.setSelected(this.selected)
 
-      if (isBingo) {
+      const newBingos = bingoService.getBingos(this.selected, this.itemMatcher)
+
+      if (newBingos > this.bingos) {
         this.$emit('bingo')
+        setTimeout(() => {
+          this.bingos = newBingos
+        }, 5000)
+      } else {
+        this.bingos = newBingos
       }
-    },
-
-    toItemId (rowIdx, colIdx) {
-      return 100 * rowIdx + colIdx
     }
   }
 }
