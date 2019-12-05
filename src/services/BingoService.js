@@ -76,6 +76,19 @@ class BingoService {
         bingos++
       }
     }
+    for (const offset of [0, 3]) {
+      let matches = 0
+      for (let loc = 0; loc < EDGE_LENGTH; ++loc) {
+        const row = loc
+        const col = offset !== 0 ? offset - loc : loc
+        if (selected.some(itemMatcher(row, col))) {
+          matches++
+        }
+        if (matches === EDGE_LENGTH) {
+          bingos++
+        }
+      }
+    }
     return bingos
   }
 
