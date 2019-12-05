@@ -1,6 +1,6 @@
 <template>
   <div class="bingo-overlay">
-    <img src="../assets/sale.png"/>
+    <img src="@/assets/sale.png"/>
   </div>
 </template>
 
