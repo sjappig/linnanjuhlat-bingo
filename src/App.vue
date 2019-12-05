@@ -24,7 +24,7 @@ export default {
       this.isBingo = true
       setTimeout(() => {
         this.isBingo = false
-      }, 3500)
+      }, 5000)
     }
   }
 }

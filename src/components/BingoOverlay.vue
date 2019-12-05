@@ -1,15 +1,10 @@
 <template>
   <div class="bingo-overlay">
-    <span class="stamp is-bingo">Bingo</span>
+    <img src="../assets/sale.png"/>
   </div>
 </template>
 
-<script>
-</script>
-
 <style scoped>
-@import '../styles/rubberstamp.css';
-
 .bingo-overlay {
   position: fixed;
   width: 100%;
@@ -22,13 +17,19 @@
   z-index: 10;
 }
 
-.is-bingo {
-  position: absolute;
-  color: red;
-  border: 0.5rem solid red;
-  font-size: 6rem;
-  top: 20%;
-  left: 50%;
-  transform: rotate(12deg) translate(-50%, -20%);
+img {
+  transform: rotate(90deg);
+  position: relative;
+  animation-name: peeker;
+  animation-duration: 5s;
+  left: -500px;
+}
+
+@keyframes peeker {
+  0% { left: -250px; }
+  35% { left: -200px; }
+  50% { left: -200px; }
+  75% { left: 0px; }
+  100% { left: -250px }
 }
 </style>
