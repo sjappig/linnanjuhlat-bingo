@@ -26,10 +26,9 @@ img {
 }
 
 @keyframes peeker {
-  0% { left: -250px; }
-  35% { left: -200px; }
-  50% { left: -200px; }
-  75% { left: 0px; }
+  0% { left: -200px; }
+  75% { left: -75px; }
+  85% { left: 0px; }
   100% { left: -250px }
 }
 </style>
